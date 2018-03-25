@@ -1,0 +1,11 @@
+C:\_M_SOURCE_\csharp-dotNET\emu_sands\EmuSandbox\EmuSandbox\bin\Debug\netcoreapp2.0\EmuSandbox.deps.json
+C:\_M_SOURCE_\csharp-dotNET\emu_sands\EmuSandbox\EmuSandbox\bin\Debug\netcoreapp2.0\EmuSandbox.runtimeconfig.json
+C:\_M_SOURCE_\csharp-dotNET\emu_sands\EmuSandbox\EmuSandbox\bin\Debug\netcoreapp2.0\EmuSandbox.runtimeconfig.dev.json
+C:\_M_SOURCE_\csharp-dotNET\emu_sands\EmuSandbox\EmuSandbox\bin\Debug\netcoreapp2.0\EmuSandbox.dll
+C:\_M_SOURCE_\csharp-dotNET\emu_sands\EmuSandbox\EmuSandbox\bin\Debug\netcoreapp2.0\EmuSandbox.pdb
+C:\_M_SOURCE_\csharp-dotNET\emu_sands\EmuSandbox\EmuSandbox\obj\Debug\netcoreapp2.0\EmuSandbox.csprojResolveAssemblyReference.cache
+C:\_M_SOURCE_\csharp-dotNET\emu_sands\EmuSandbox\EmuSandbox\obj\Debug\netcoreapp2.0\EmuSandbox.csproj.CoreCompileInputs.cache
+C:\_M_SOURCE_\csharp-dotNET\emu_sands\EmuSandbox\EmuSandbox\obj\Debug\netcoreapp2.0\EmuSandbox.AssemblyInfoInputs.cache
+C:\_M_SOURCE_\csharp-dotNET\emu_sands\EmuSandbox\EmuSandbox\obj\Debug\netcoreapp2.0\EmuSandbox.AssemblyInfo.cs
+C:\_M_SOURCE_\csharp-dotNET\emu_sands\EmuSandbox\EmuSandbox\obj\Debug\netcoreapp2.0\EmuSandbox.dll
+C:\_M_SOURCE_\csharp-dotNET\emu_sands\EmuSandbox\EmuSandbox\obj\Debug\netcoreapp2.0\EmuSandbox.pdb

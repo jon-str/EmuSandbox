@@ -1,0 +1,104 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace EmuSandbox
+{
+    public static partial class Binary
+    {
+        public class QWORD : BinaryValue
+        {
+            #region Properties
+
+            ulong mulQWORD;
+
+            Binary.DWORD mdwHighDWORD;
+            Binary.DWORD mdwLowDWORD;
+
+            #endregion
+
+            #region Constructor
+
+            public QWORD ( ulong ulQWORD )
+            {
+                mulQWORD = Align(ulQWORD);
+            }
+
+            public QWORD()
+            {
+                new QWORD ( BinaryValue.Zero_64bit);
+            }
+
+            #endregion
+
+            #region Private Methods
+            private ulong Align ( ulong ulQWORD )
+            {
+
+                mdwHighDWORD = new Binary.DWORD ( ( uint ) ( ( ulQWORD ) >> 32 ) );
+                mdwLowDWORD = new Binary.DWORD ( ( uint ) ( ulQWORD ) );
+
+                return ( ulong ) ( ( ( ( ulong ) mdwHighDWORD.Value ) << 32 ) | mdwLowDWORD.Value );
+            }
+            #endregion
+
+            #region Accessors
+
+            public ulong Value
+            {
+                get { return mulQWORD; }
+                set
+                {
+                    mulQWORD = Align (value);
+                }
+            }
+
+            public Binary.DWORD HighDWORD
+            {
+                get { return mdwHighDWORD; }
+                set { mdwHighDWORD = value; }
+            }
+
+            public Binary.DWORD LowDWORD
+            {
+                get { return mdwLowDWORD; }
+                set { mdwLowDWORD = value; }
+            }
+            public static new int Size
+            {
+                get { return sizeof ( ulong ); }
+            }
+
+            public static new int SizeInBits
+            {
+                get { return QWORD.Size * ConventionSupport.BitsPerByte; }
+            }
+
+            public static ulong MaxValue
+            {
+                get { return BinaryValue.BitMask_64bit; }
+            }
+
+            public static ulong Zero
+            {
+                get { return BinaryValue.Zero_64bit; }
+            }
+
+            public static new Type UnderlyingType
+            {
+                get { return typeof ( ulong ); }
+            }
+
+            #endregion
+
+            #region Convinience
+
+            public override string ToString ( )
+            {
+                return "[QWORD: " + ConventionSupport.HexPrefix + this.Value.ToString ( "X16" ) + " ," + mdwHighDWORD.ToString ( ) + " ," + mdwLowDWORD.ToString ( ) + "] ";
+            }
+
+            #endregion
+        }
+    }
+}
