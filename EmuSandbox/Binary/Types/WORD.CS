@@ -32,14 +32,6 @@ namespace EmuSandbox
                 mbHighByte = new Binary.BYTE ( ( byte ) ( ( usWORD & BinaryValue.BitMask_Top8Bits ) >> 8 ) );
                 mbLowByte = new Binary.BYTE ( ( byte ) ( usWORD & BinaryValue.BitMask_Bottom8Bits ) );
 
-                //mbHighByte.Dump ( );
-                //mbLowByte.Dump ( );
-                //ushort t1 = ( ushort ) ( ( usWORD & BinaryValue.BitMask_Top8Bits ) >> 8 );
-                //ushort t2 = ( ushort ) ( usWORD & BinaryValue.BitMask_Bottom8Bits );
-                //byte t3 = mbHighByte.Value;
-                //byte t4 = mbLowByte.Value;
-                //ushort t5 = ( ushort ) ( ( mbHighByte.Value << 8 ) | ( mbLowByte.Value ) );
-                //{ };
                 return ( ushort ) ( ( mbHighByte.Value << 8 ) | ( mbLowByte.Value ) );
             }
 
@@ -120,14 +112,6 @@ namespace EmuSandbox
 
             #endregion
 
-            #region Operators
-            public static WORD operator + ( WORD wA , WORD wB )
-            {
-                WORD wNew = new WORD ( );
-                wNew.Value = ( ushort ) ( wA.Value + wB.Value );
-                return wNew;
-            }
-            #endregion
         }
     }
 }

@@ -13,6 +13,9 @@ namespace EmuSandbox
             Binary.DWORD bDwrd = new Binary.DWORD ( 0xDEAD_BEEF );
             Binary.QWORD bQwrd = new Binary.QWORD ( 0xF0F0_ABCD_DEAD_BEEF );
 
+            bWrd.HighByte.Value;
+            bWrd.LowByte--;
+
             bBit.Dump ( );
             bNyl.Dump ( );
             bByt.Dump ( );
