@@ -6,7 +6,7 @@ namespace EmuSandbox
 {
     public static partial class Binary
     {
-        public class WORD : BinaryValue
+        public partial class WORD : BinaryValue
         {
             #region Properties
 
