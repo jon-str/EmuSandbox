@@ -14,32 +14,108 @@ namespace EmuSandbox
             Console.WriteLine ( "Binary.WORD  SIZE: (Bytes): " + Binary.WORD.Size  + " | (Bits): " + Binary.WORD.SizeInBits +  ", TYPE: " + Binary.WORD.UnderlyingType.Name );
             Console.WriteLine ( "Binary.DWORD SIZE: (Bytes): " + Binary.DWORD.Size + " | (Bits): " + Binary.DWORD.SizeInBits + ", TYPE: " + Binary.DWORD.UnderlyingType.Name );
             Console.WriteLine ( "Binary.QWORD SIZE: (Bytes): " + Binary.QWORD.Size + " | (Bits): " + Binary.QWORD.SizeInBits + ", TYPE: " + Binary.QWORD.UnderlyingType.Name );
-
-            //Binary.WORD word = new Binary.WORD ( ( ushort ) 0xF000 );
-            //word.Dump ( );
-            //Binary.WORD one = new Binary.WORD ( ( ushort ) 0x0001 );
-            //one.Dump ( );
-            //Binary.WORD newWord =  (word + one);
-            //newWord.Dump ( );
-            //word = one;
-            //word.Dump ( );
         }
 
         public abstract class BinaryValue
         {
-            public void Dump ( )
+            #region Enums
+
+            public enum StringMode
             {
-                Console.WriteLine ( this.ToString ( ) );
+                 HEX
+                ,BINARY
+                ,DECIMAL
+                ,HEX_DECIMAL
+                ,HEX_BINARY
+                ,BINARY_DECIMAL
+                ,ALL_BASE
+                ,VERBOSE
+                ,DEFAULT
+
             }
 
-            public static int Size { get; }
-            public static int SizeInBits { get; }
+            #endregion
 
-            public static Type UnderlyingType { get; }
+            #region Console Logging Methods
+
+            public void Dump ( StringMode smeMode, string sPrependString)
+            {
+                string sMsg = string.Empty;
+
+                if( ! ( string.IsNullOrEmpty( sPrependString ) ) )
+                {
+                    if ( ! ( sPrependString.EndsWith( ConventionSupport.Space ) ) )
+                    {
+                        sPrependString += ConventionSupport.Space;
+                    }
+
+                    sMsg += sPrependString;
+                }
+
+                switch ( smeMode )
+                {
+
+                    case StringMode.VERBOSE:
+                        Console.WriteLine ( this.ToStringVerbose ( ) );
+                        break;
+
+                    case StringMode.DEFAULT:
+                        Console.WriteLine ( this.ToString ( ) );
+                        break;
+
+                    case StringMode.HEX:
+                        Console.Write ( this.ToStringHex ( ) );
+                        break;
+
+                    case StringMode.BINARY:
+                        Console.WriteLine ( this.ToStringBinary ( ) );
+                        break;
+
+                    case StringMode.DECIMAL:
+                        Console.WriteLine ( this.ToStringDecimal ( ) );
+                        break;
+
+                    case StringMode.ALL_BASE:
+                    case StringMode.HEX_DECIMAL:
+                    case StringMode.HEX_BINARY:
+                    case StringMode.BINARY_DECIMAL:
+                    default:
+                        throw new NotImplementedException ( );
+                }
+            }
+
+            public void Dump ( ) { Dump ( ConventionSupport.StringMode , null ); }
+            public void Dump ( string sPrepend ) { Dump ( ConventionSupport.StringMode , sPrepend ); }
+            public void Dump ( StringMode smeMode ) { Dump ( smeMode , null ); }
+
+            #endregion
+
+            public abstract string ToStringHex ( );
+            public abstract string ToStringBinary( );
+            public abstract string ToStringVerbose ( );
+            public abstract string ToStringDecimal ( );
 
             public abstract new string ToString ( );
 
             #region Accessors
+
+            #region Abstract / Unimplemented
+
+            public static int Size { get; }
+            public static int SizeInBits { get; }
+            public static Type UnderlyingType { get; }
+
+            #endregion
+
+            #region Binary Convinience
+
+            public static int BitsPerByte { get { return ConventionSupport.BitsPerByte; } }
+
+            public static int BitsPerNyble { get { return ConventionSupport.BitsPerNyble; } }
+
+            public static byte On_1bit { get { return mul1Bit_ON; } }
+            public static byte Off_1bit { get { return mul1Bit_OFF; } }
+
             public static byte Zero_1bit { get { return mul1BitZero; } }
             public static byte Zero_4bit { get { return mul4bitZero; } }
 
@@ -77,13 +153,17 @@ namespace EmuSandbox
             public static byte BitMask_Top4Bits { get { return mulTop4BitsMask; } }
 
             public static byte BitMask_Bottom4Bits { get { return mulBottom4BitsMask; } }
+
+            #endregion
+
             #endregion
 
             #region Constants
+
             private const byte      mul1Bit_ON          = 0b1;
             private const byte      mul1Bit_OFF         = 0b0;
 
-            private const byte      mul1BitMask         = 0b1;
+            private const byte      mul1BitMask         = 0b0001;
 
             private const byte      mul4bitMask         = 0b1111;
 
@@ -112,6 +192,7 @@ namespace EmuSandbox
             private const ushort    mul16bitZero    = 0x0000;
             private const uint      mul32bitZero    = 0x0000_0000;
             private const ulong     mul64bitZero    = 0x0000_0000_0000_0000;
+
             #endregion
         }
     }

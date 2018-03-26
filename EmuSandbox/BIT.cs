@@ -8,17 +8,23 @@ namespace EmuSandbox
     {
         public class BIT : BinaryValue
         {
-            private Binary.NYBLE m_bn_Value;
+            #region Properties
+
+            private Binary.NYBLE mbnValue;
+
+            #endregion
+
+            #region Constructors
 
             public BIT ( bool bOnOrOff )
             {
                 if ( bOnOrOff == true )
                 {
-                    m_bn_Value = new Binary.NYBLE ( ( byte ) ( 0b1 ) );
+                    mbnValue = new Binary.NYBLE ( ( byte ) ( BinaryValue.On_1bit ) );
                 }
                 else if ( bOnOrOff == false )
                 {
-                    m_bn_Value = new Binary.NYBLE ( ( byte ) ( 0b0 ) );
+                    mbnValue = new Binary.NYBLE ( ( byte ) ( BinaryValue.Off_1bit ) );
                 }
                 else
                 {
@@ -30,11 +36,11 @@ namespace EmuSandbox
             {
                 if ( iOnOrOff == 1 )
                 {
-                    m_bn_Value = new Binary.NYBLE ( ( byte ) ( 0b1 ) );
+                    mbnValue = new Binary.NYBLE ( ( byte ) ( BinaryValue.On_1bit ) );
                 }
                 else if ( iOnOrOff == 0 )
                 {
-                    m_bn_Value = new Binary.NYBLE ( ( byte ) ( 0b0 ) );
+                    mbnValue = new Binary.NYBLE ( ( byte ) ( BinaryValue.Off_1bit ) );
                 }
                 else
                 {
@@ -49,10 +55,14 @@ namespace EmuSandbox
                 new BIT ( BinaryValue.Zero_1bit );
             }
 
+            #endregion
+
+            #region Accessors
+
             public byte Value
             {
-                get { return ( byte ) ( m_bn_Value.Value & 0b0001 ); }
-                set { m_bn_Value.Value = ( byte ) ( value & 0b0001 ); }
+                get { return ( byte ) ( mbnValue.Value & 0b0001 ); }
+                set { mbnValue.Value = ( byte ) ( value & 0b0001 ); }
 
             }
 
@@ -76,10 +86,36 @@ namespace EmuSandbox
                 get { return BinaryValue.Zero_1bit; }
             }
 
+            #endregion
+
+            #region Convinience
+
             public override string ToString ( )
             {
-                return "[BIT: 0b" + Convert.ToString ( ( m_bn_Value.Value & 0x01 ) , 2 ).PadLeft ( 1 , '0' );
+                return "[BIT: " + ConventionSupport.ProduceBinaryString ( (byte) (mbnValue.Value & BinaryValue.BitMask_1bit) ) + "]";
             }
+
+            public override string ToStringVerbose ( )
+            {
+                return "[BIT: 0b" + Convert.ToString ( ( mbnValue.Value & 0x01 ) , 2 ).PadLeft ( 1 , '0' );
+            }
+
+            public override string ToStringHex ( )
+            {
+                throw new NotImplementedException ( );
+            }
+
+            public override string ToStringBinary ( )
+            {
+                throw new NotImplementedException ( );
+            }
+
+            public override string ToStringDecimal ( )
+            {
+                throw new NotImplementedException ( );
+            }
+
+            #endregion
         }
     }
 }

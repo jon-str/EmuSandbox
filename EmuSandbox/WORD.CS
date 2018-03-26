@@ -32,7 +32,15 @@ namespace EmuSandbox
                 mbHighByte = new Binary.BYTE ( ( byte ) ( ( usWORD & BinaryValue.BitMask_Top8Bits ) >> 8 ) );
                 mbLowByte = new Binary.BYTE ( ( byte ) ( usWORD & BinaryValue.BitMask_Bottom8Bits ) );
 
-                return ( ushort ) ( ( ( ( ushort ) mbHighByte.Value ) << 8 ) | mbLowByte.Value );
+                //mbHighByte.Dump ( );
+                //mbLowByte.Dump ( );
+                //ushort t1 = ( ushort ) ( ( usWORD & BinaryValue.BitMask_Top8Bits ) >> 8 );
+                //ushort t2 = ( ushort ) ( usWORD & BinaryValue.BitMask_Bottom8Bits );
+                //byte t3 = mbHighByte.Value;
+                //byte t4 = mbLowByte.Value;
+                //ushort t5 = ( ushort ) ( ( mbHighByte.Value << 8 ) | ( mbLowByte.Value ) );
+                //{ };
+                return ( ushort ) ( ( mbHighByte.Value << 8 ) | ( mbLowByte.Value ) );
             }
 
             #endregion
@@ -87,7 +95,27 @@ namespace EmuSandbox
 
             public override string ToString ( )
             {
-                return "[WORD: 0x" + musWORD.ToString ( "X4" ) + ", HB: " + mbHighByte.ToString ( ) + ", LB: " + mbLowByte.ToString ( ) + "] ";
+                return "[WORD: " + ConventionSupport.ProduceHexString ( ( ushort ) ( musWORD & BinaryValue.BitMask_16bit ) ) + "]";
+            }
+
+            public override string ToStringVerbose ( )
+            {
+                return "[WORD: 0x" + musWORD.ToString ( "X4" ) + ", HB: " + mbHighByte.ToStringVerbose ( ) + ", LB: " + mbLowByte.ToStringVerbose ( ) + "] ";
+            }
+
+            public override string ToStringHex ( )
+            {
+                throw new NotImplementedException ( );
+            }
+
+            public override string ToStringBinary ( )
+            {
+                throw new NotImplementedException ( );
+            }
+
+            public override string ToStringDecimal ( )
+            {
+                throw new NotImplementedException ( );
             }
 
             #endregion

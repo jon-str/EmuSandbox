@@ -8,17 +8,47 @@ namespace EmuSandbox
     {
         public partial class NYBLE : BinaryValue
         {
+            #region Properties
+
             private byte mnNyble;
+
+            #endregion
+
+            #region Constructors
 
             public NYBLE ( byte nNyble )
             {
-                mnNyble = ( byte ) ( nNyble & 0x0F );
+                mnNyble = ( byte ) ( nNyble & BinaryValue.BitMask_4bit );
             }
 
             public NYBLE ( )
             {
-                new NYBLE ( ( byte ) 0x00 );
+                new NYBLE ( ( byte ) BinaryValue.Zero_4bit );
             }
+
+            #endregion
+
+            #region Private Methods
+
+            private bool CheckBitBoundaries ( int iBitToSet , int iConstraint )
+            {
+                if ( iBitToSet < 0 || iBitToSet > iConstraint )
+                {
+                    throw new Exception ( "Cannot set [BIT: " + Convert.ToString ( iBitToSet , 2 ).PadLeft ( 4 , '0' ) );
+                    return false;
+                }
+
+                if ( iConstraint > Math.Abs ( Binary.NYBLE.Size ) )
+                {
+                    throw new Exception ( "Cannot set [BIT: " + Convert.ToString ( iBitToSet , 2 ).PadLeft ( 4 , '0' ) );
+                }
+
+                return true;
+            }
+
+            #endregion
+
+            #region Accessors
 
             public byte Value
             {
@@ -51,6 +81,10 @@ namespace EmuSandbox
                 get { return typeof ( byte ); }
             }
 
+            #endregion
+
+            #region In Design
+
             public void SetBitOn ( int iBitToSetOneToFour )
             {
                 if ( iBitToSetOneToFour < 0 || iBitToSetOneToFour > 3 )
@@ -81,26 +115,36 @@ namespace EmuSandbox
                 { };
             }
 
+            #endregion
+
+            #region Convinience
+
             public override string ToString ( )
+            {
+                return "[NYBLE: " + ConventionSupport.ProduceBinaryNybleString ( (byte) (mnNyble  & BinaryValue.BitMask_4bit) ) + "]";
+            }
+
+            public override string ToStringVerbose ( )
             {
                 return "[NYBLE: 0x" + mnNyble.ToString ( "X1" ) + " | 0b" + Convert.ToString ( mnNyble , 2 ).PadLeft ( 4 , '0' ) + "] ";
             }
 
-            private bool CheckBitBoundaries ( int iBitToSet , int iConstraint )
+            public override string ToStringHex ( )
             {
-                if ( iBitToSet < 0 || iBitToSet > iConstraint )
-                {
-                    throw new Exception ( "Cannot set [BIT: " + Convert.ToString ( iBitToSet , 2 ).PadLeft ( 4 , '0' ) );
-                    return false;
-                }
-
-                if ( iConstraint > Math.Abs(Binary.NYBLE.Size) )
-                {
-                    throw new Exception ( "Cannot set [BIT: " + Convert.ToString ( iBitToSet , 2 ).PadLeft ( 4 , '0' ) );
-                }
-
-                return true;
+                throw new NotImplementedException ( );
             }
+
+            public override string ToStringBinary ( )
+            {
+                throw new NotImplementedException ( );
+            }
+
+            public override string ToStringDecimal ( )
+            {
+                throw new NotImplementedException ( );
+            }
+
+            #endregion
         }
     }
 }

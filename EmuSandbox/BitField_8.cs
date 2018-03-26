@@ -51,7 +51,7 @@ namespace EmuSandbox
 
             }
 
-            public override string ToString ( )
+            public override string ToStringVerbose ( )
             {
                 string sReturnString = string.Empty;
 

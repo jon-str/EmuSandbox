@@ -95,7 +95,36 @@ namespace EmuSandbox
 
             public override string ToString ( )
             {
-                return "[QWORD: " + ConventionSupport.HexPrefix + this.Value.ToString ( "X16" ) + " ," + mdwHighDWORD.ToString ( ) + " ," + mdwLowDWORD.ToString ( ) + "] ";
+                return "[QWORD: " + ConventionSupport.ProduceHexString ( (ulong)( mulQWORD & BinaryValue.BitMask_64bit) ) + "]";
+            }
+
+            public override string ToStringVerbose ( )
+            {
+                return "[QWORD: " + ConventionSupport.HexPrefix + this.Value.ToString ( "X16" ) + " ," + mdwHighDWORD.ToStringVerbose ( ) + " ," + mdwLowDWORD.ToStringVerbose ( ) + "] ";
+            }
+
+            public override string ToStringHex ( )
+            {
+                throw new NotImplementedException ( );
+            }
+
+            public override string ToStringBinary ( )
+            {
+                throw new NotImplementedException ( );
+            }
+
+            public override string ToStringDecimal ( )
+            {
+                throw new NotImplementedException ( );
+            }
+
+            public string ToStringAllBase ( )
+            {
+                return string.Format ( "[QWORD: (D): {0} | (H): {1} | (B): {2}" ,
+                                      ConventionSupport.ProduceDecimalString ( mulQWORD ) ,
+                                      ConventionSupport.ProduceHexString ( mulQWORD ) ,
+                                      ConventionSupport.ProduceBinaryString ( mulQWORD ) 
+                                      );
             }
 
             #endregion

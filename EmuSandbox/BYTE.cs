@@ -17,7 +17,7 @@ namespace EmuSandbox
 
             #endregion
 
-            #region Constructor
+            #region Constructors
 
             public BYTE ( byte bByte ) { mbByte = Align ( bByte ); }
 
@@ -29,10 +29,10 @@ namespace EmuSandbox
 
             private byte Align ( byte bByte )
             {
-                mnHighNyble = new Binary.NYBLE ( ( byte ) ( ( bByte & BinaryValue.BitMask_Top8Bits ) >> 4 ) );
-                mnLowNyble = new Binary.NYBLE ( ( byte ) ( bByte & BinaryValue.BitMask_Bottom8Bits ) );
+                mnHighNyble = new Binary.NYBLE ( ( byte ) ( ( bByte & BinaryValue.BitMask_Top4Bits ) >> 4 ) );
+                mnLowNyble = new Binary.NYBLE ( ( byte ) ( bByte & BinaryValue.BitMask_Bottom4Bits ) );
 
-                return ( byte ) ( ( ( ( byte ) mnHighNyble.Value ) << 8 ) | mnLowNyble.Value );
+                return ( byte ) ( ( ( ( byte ) mnHighNyble.Value ) << 4 ) | mnLowNyble.Value );
             }
 
             #endregion
@@ -88,7 +88,27 @@ namespace EmuSandbox
 
             public override string ToString ( )
             {
-                return "[BYTE: 0x" + mbByte.ToString ( "X2" ) + ", HN: " + mnHighNyble.ToString ( ) + ", LN: " + mnLowNyble.ToString ( ) + "] ";
+                return "[BYTE: " + ConventionSupport.ProduceHexString ( ( byte ) ( mbByte & BinaryValue.BitMask_8bit ) ) + "]";
+            }
+
+            public override string ToStringVerbose ( )
+            {
+                return "[BYTE: " + ConventionSupport.HexPrefix + mbByte.ToString ( "X2" ) + ", HN: " + mnHighNyble.ToStringVerbose ( ) + ", LN: " + mnLowNyble.ToStringVerbose ( ) + "] ";
+            }
+
+            public override string ToStringHex ( )
+            {
+                return ToString ( );
+            }
+
+            public override string ToStringBinary ( )
+            {
+                return "[BYTE: " + ConventionSupport.ProduceBinaryByteString ( ( byte ) ( mbByte & BinaryValue.BitMask_8bit ) ) + "]";
+            }
+
+            public override string ToStringDecimal ( )
+            {
+                return "[BYTE: " + ConventionSupport.ProduceDecimalString ( mbByte ) + "]";
             }
 
             #endregion

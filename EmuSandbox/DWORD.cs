@@ -29,8 +29,9 @@ namespace EmuSandbox
 
             private uint Align ( uint uiDWORD )
             {
-                mbwHighWord = new Binary.WORD ( ( ushort ) ( ( uiDWORD & BinaryValue.BitMask_Top16Bits ) >> 16 ) );
-                mbwLowWord = new Binary.WORD ( ( ushort ) ( uiDWORD & BinaryValue.BitMask_Bottom16Bits ) );
+                mbwHighWord = new Binary.WORD  ( ( ushort ) ( ( uiDWORD & BinaryValue.BitMask_Top16Bits ) >> 16) );
+                mbwLowWord = new Binary.WORD (  ( ushort ) ( ( uiDWORD & BinaryValue.BitMask_Bottom16Bits ) ) );
+
 
                 return ( uint ) ( ( ( ( uint ) mbwHighWord.Value ) << 16 ) | mbwLowWord.Value );
             }
@@ -73,7 +74,27 @@ namespace EmuSandbox
 
             public override string ToString ( )
             {
-                return "[DWORD: 0x" + muiDWORD.ToString ( "X4" ) + " ," + mbwHighWord.ToString ( ) + " ," + mbwLowWord.ToString ( ) + "] ";
+                return "[DWORD: " + ConventionSupport.ProduceHexString ( ( uint ) ( muiDWORD & BinaryValue.BitMask_32bit ) ) + "]";
+            }
+
+            public override string ToStringVerbose ( )
+            {
+                return "[DWORD: 0x" + muiDWORD.ToString ( "X4" ) + " ," + mbwHighWord.ToStringVerbose ( ) + " ," + mbwLowWord.ToStringVerbose ( ) + "] ";
+            }
+
+            public override string ToStringHex ( )
+            {
+                throw new NotImplementedException ( );
+            }
+
+            public override string ToStringBinary ( )
+            {
+                throw new NotImplementedException ( );
+            }
+
+            public override string ToStringDecimal ( )
+            {
+                throw new NotImplementedException ( );
             }
 
             #endregion

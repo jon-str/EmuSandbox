@@ -5,45 +5,22 @@ namespace EmuSandbox
     class Program
     {
         static void Main(string[] args)
-        { 
-            //Binary.DumpBinaryTypes ( );
+        {
+            Binary.BIT bBit = new Binary.BIT ( 0b1 );
+            Binary.NYBLE bNyl = new Binary.NYBLE ( 0xA );
+            Binary.BYTE bByt = new Binary.BYTE ( 0xCD );
+            Binary.WORD bWrd = new Binary.WORD ( 0xABCD );
+            Binary.DWORD bDwrd = new Binary.DWORD ( 0xDEAD_BEEF );
+            Binary.QWORD bQwrd = new Binary.QWORD ( 0xF0F0_ABCD_DEAD_BEEF );
 
-            Binary.DWORD bqWord = new Binary.DWORD ( 0xF0F0_ABCD );
+            bBit.Dump ( );
+            bNyl.Dump ( );
+            bByt.Dump ( );
+            bWrd.Dump ( );
+            bDwrd.Dump ( );
+            bQwrd.Dump ( );
 
-            bqWord.Dump ( );
-
-            //Binary.NYBLE bnNyb = new Binary.NYBLE ( 0b0000 );
-            //bnNyb.Dump ( );
-
-            //Console.WriteLine ( Environment.NewLine );
-
-            //bnNyb.SetBitOn ( 0 );
-            //bnNyb.Dump ( );
-
-            //bnNyb.SetBitOn ( 1 );
-            //bnNyb.Dump ( );
-
-            //bnNyb.SetBitOn ( 2 );
-            //bnNyb.Dump ( );
-
-            //bnNyb.SetBitOn ( 3 );
-            //bnNyb.Dump ( );
-
-            //Console.WriteLine ( Environment.NewLine );
-
-            //bnNyb.SetBitOff ( 3 );
-            //bnNyb.Dump ( );
-
-            //bnNyb.SetBitOff ( 2 );
-            //bnNyb.Dump ( );
-
-            //bnNyb.SetBitOff ( 1 );
-            //bnNyb.Dump ( );
-
-            //bnNyb.SetBitOff ( 0 );
-            //bnNyb.Dump ( );
-
-
+            Console.WriteLine(bQwrd.ToStringAllBase ( ));
 
             Console.ReadKey ( );
         }
